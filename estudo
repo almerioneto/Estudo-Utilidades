@@ -1,0 +1,75 @@
+import pandas as pd
+
+
+dados = pd.read_excel('Pasta3.xlsx')
+dados1 = dados.copy()
+dados1
+
+
+
+mean_producao = dados.Producao.mean()
+mean_gas = dados.Gas.mean()
+mean_agua = dados.Agua.mean()
+mean_energia = dados.Energia.mean()
+
+lst_mean = [mean_producao,mean_gas,mean_agua,mean_energia]
+print(lst_mean)
+
+df_mean = pd.DataFrame(lst_mean, columns = ['Media']).T
+
+df_mean.columns = ['Producao', 'Gas', 'Agua', 'Energia']
+
+
+tabela1 = dados.append(df_mean)
+tabela1
+
+median_producao = dados1.Producao.median()
+median_gas = dados1.Gas.median()
+median_agua = dados1.Agua.median()
+median_energia = dados1.Energia.median()
+
+lst_median = [mean_producao,mean_gas,mean_agua,mean_energia]
+print(lst_median)
+
+
+df_median = pd.DataFrame(lst_median, columns = ['Mediana']).T
+df_median.columns = ['Producao', 'Gas', 'Agua', 'Energia']
+
+tabela2 = tabela1.append(df_median)
+
+std_producao = dados1.Producao.std()
+std_gas = dados1.Gas.std()
+std_agua = dados1.Agua.std()
+std_energia = dados1.Energia.std()
+
+lst_std = [std_producao,std_gas,std_agua,std_energia]
+df_std = pd.DataFrame(lst_std, columns = ['Desvio']).T
+df_std.columns = ['Producao', 'Gas', 'Agua', 'Energia']
+
+tabela3 = tabela2.append(df_std)
+tabela3
+
+import matplotlib.pyplot as plt
+
+
+plt.plot(dados.Producao)
+plt.title('Produção')
+plt.ylabel('Produção Cambial')
+plt.xlabel('Meses')
+
+
+
+plt.plot(dados.Gas)
+plt.title('Gas')
+plt.ylabel('Gas m³')
+plt.xlabel('Meses')
+
+plt.plot(dados.Agua)
+plt.title('Agua')
+plt.ylabel('Agua Litros')
+plt.xlabel('Meses')
+
+plt.plot(dados.Energia)
+plt.title('Energia')
+plt.ylabel('Energia kwh')
+plt.xlabel('Meses')
